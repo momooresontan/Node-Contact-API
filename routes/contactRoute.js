@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
 router.get("/:id", (req, res) => {
   res.status(200).json({ message: "Get one contact by id" });
 });
-router.patch("/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   res.status(200).json({ message: "Update one contact by id" });
 });
 router.delete("/:id", (req, res) => {
