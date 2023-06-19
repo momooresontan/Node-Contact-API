@@ -1,0 +1,11 @@
+{
+  "name": "contactmanagerapi",
+  "version": "1.0.0",
+  "description": "An express.js project for my contacts",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sontan Momooreoluwa",
+  "license": "ISC"
+}
