@@ -2,7 +2,7 @@
 //@route GET /api/contacts
 //@public
 
-exports.getAllContacts = (req, res) => {
+exports.getAllContacts = async (req, res) => {
   res.status(200).json({ message: "Get all contacts" });
 };
 
@@ -10,7 +10,7 @@ exports.getAllContacts = (req, res) => {
 //@route POST /api/contacts
 //@public
 
-exports.createContact = (req, res) => {
+exports.createContact = async (req, res) => {
   console.log(req.body);
   const { name, email, phone } = req.body;
   if (!name || !email || !phone) {
@@ -24,7 +24,7 @@ exports.createContact = (req, res) => {
 //@route GET /api/contacts/:id
 //@public
 
-exports.getContactById = (req, res) => {
+exports.getContactById = async (req, res) => {
   res.status(200).json({ message: "Get one contact by id" });
 };
 
@@ -32,7 +32,7 @@ exports.getContactById = (req, res) => {
 //@route PUT /api/contacts/:id
 //@public
 
-exports.updateContactById = (req, res) => {
+exports.updateContactById = async (req, res) => {
   res.status(201).json({ message: "Update one contact by id" });
 };
 
@@ -40,6 +40,6 @@ exports.updateContactById = (req, res) => {
 //@route DELETE /api/contacts/:id
 //@public
 
-exports.deleteContactById = (req, res) => {
+exports.deleteContactById = async (req, res) => {
   res.status(204).json({ message: "Delete one contact by id" });
 };
