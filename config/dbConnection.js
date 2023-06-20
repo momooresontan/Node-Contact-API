@@ -11,7 +11,7 @@ const DB = process.env.DB_CONNECTION_STRING.replace(
 const connectDb = async () => {
   try {
     const connect = await DB;
-    console.log(`Database connected: ${connect}, ${connect.connection}`);
+    console.log("Database connected: ", connect);
   } catch (err) {
     console.log(err);
     process.exit(1);
