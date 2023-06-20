@@ -72,6 +72,6 @@ exports.deleteContactById = asyncHandler(async (req, res) => {
     throw new Error("Contact not found!");
   }
 
-  await Contact.remove();
-  res.status(204).json(contact);
+  await Contact.findByIdAndRemove(req.params.id);
+  res.status(200).json({ message: "Contact has been removed" });
 });
