@@ -46,6 +46,25 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
 exports.loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("All fields are mandatory!");
+  }
+  const user = await User.findOne({ email });
+
+  //compare password with hashedPassword
+  const passwordCompare = await bcrypt.compare(password, user.hashedPassword);
+  if (user && passwordCompare) {
+    const accessToken = jwt.sign({
+      user: {
+        username: user.username,
+        email: user.email,
+        id: user.id,
+      },
+    });
+    res.status(200).json({ accessToken });
+  }
+
   res.status(201).json({ message: "User logged in" });
 });
 
