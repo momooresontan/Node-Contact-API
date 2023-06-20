@@ -52,7 +52,13 @@ exports.updateContactById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Contact not found!");
   }
-  res.status(201).json({ message: "Update one contact by id" });
+
+  const updatedContact = await Contact.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+  res.status(201).json(updatedContact);
 });
 
 //@desc Delete one contact
@@ -60,5 +66,12 @@ exports.updateContactById = asyncHandler(async (req, res) => {
 //@public
 
 exports.deleteContactById = asyncHandler(async (req, res) => {
-  res.status(204).json({ message: "Delete one contact by id" });
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found!");
+  }
+
+  await Contact.remove();
+  res.status(204).json(contact);
 });
