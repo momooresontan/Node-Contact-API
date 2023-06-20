@@ -1,7 +1,10 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 const User = require("../models/userModel");
+
+dotenv.config();
 
 //@desc Register a user
 //@route POST /api/users/register
@@ -55,17 +58,22 @@ exports.loginUser = asyncHandler(async (req, res) => {
   //compare password with hashedPassword
   const passwordCompare = await bcrypt.compare(password, user.hashedPassword);
   if (user && passwordCompare) {
-    const accessToken = jwt.sign({
-      user: {
-        username: user.username,
-        email: user.email,
-        id: user.id,
+    const accessToken = jwt.sign(
+      {
+        user: {
+          username: user.username,
+          email: user.email,
+          id: user.id,
+        },
       },
-    });
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1m" }
+    );
     res.status(200).json({ accessToken });
+  } else {
+    res.status(401);
+    throw new Error("Email or password invaild!");
   }
-
-  res.status(201).json({ message: "User logged in" });
 });
 
 //@desc Current user
