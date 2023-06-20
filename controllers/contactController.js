@@ -34,7 +34,12 @@ exports.createContact = asyncHandler(async (req, res) => {
 //@public
 
 exports.getContactById = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Get one contact by id" });
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found!");
+  }
+  res.status(200).json(contact);
 });
 
 //@desc Update one contact
@@ -42,6 +47,11 @@ exports.getContactById = asyncHandler(async (req, res) => {
 //@public
 
 exports.updateContactById = asyncHandler(async (req, res) => {
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found!");
+  }
   res.status(201).json({ message: "Update one contact by id" });
 });
 
