@@ -1,10 +1,12 @@
 const asyncHandler = require("express-async-handler");
+const User = require("../models/userModel");
 
 //@desc Register a user
 //@route POST /api/users/register
 //@public
 
 exports.registerUser = asyncHandler(async (req, res) => {
+  const {} = req.body;
   res.status(201).json({ message: "User has been created" });
 });
 
