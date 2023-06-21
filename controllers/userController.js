@@ -81,5 +81,6 @@ exports.loginUser = asyncHandler(async (req, res) => {
 //@private
 
 exports.getMe = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Current user" });
+  const { user } = req;
+  res.status(200).json(user);
 });
